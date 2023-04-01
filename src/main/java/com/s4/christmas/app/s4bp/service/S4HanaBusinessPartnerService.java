@@ -34,7 +34,9 @@ public class S4HanaBusinessPartnerService {
         try {
             Statement stmt = connection.createStatement();
             ResultSet resultSet = stmt
-            		.executeQuery("SELECT PARTNER1,SMTP_ADDRESS from SAPABAP1.BUT051;");
+            		.executeQuery("SELECT BUT020.PARTNER, ADR6.SMTP_ADDR, BUT020.ADDRNUMBER "
+            				+ "FROM SAPABAP1.BUT020 "
+            				+ "INNER JOIN SAPABAP1.ADR6 ON BUT020.ADDRNUMBER=ADR6.ADDRNUMBER;");
             while (resultSet.next()) {
             	BusinessPartnerModel partnerModel = BusinessPartnerModel.builder()
             			.partnerId(resultSet.getString(1))
